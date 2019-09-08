@@ -1,5 +1,6 @@
 <?php
 
+use app\components\Path;
 use app\components\Seo;
 
 $params = require __DIR__ . '/params.php';
@@ -21,6 +22,9 @@ $config = [
     'components' => [
         'seo' => [
           'class' => Seo::class, //'app\components\Seo'
+        ],
+        'path' => [
+            'class' => Path::class,
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
