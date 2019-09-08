@@ -1,5 +1,7 @@
 <?php
 
+use app\components\Seo;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -11,7 +13,15 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'test' => [
+            'class' => 'app\modules\test\Module',
+        ],
+    ],
     'components' => [
+        'seo' => [
+          'class' => Seo::class, //'app\components\Seo'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Z6EMBBpdWl7jSEh6dTyCDO9elJgC2OOR',
