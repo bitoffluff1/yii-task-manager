@@ -13,4 +13,7 @@ class Activity extends Model
     public $dayEnd;
     public $userId;
     public $description;
+    public $cycle;
+    public $main;
+
 }

@@ -6,6 +6,8 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
+    <p><?= Yii::$app->path->getPath()?></p>
+
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
