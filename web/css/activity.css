@@ -1,0 +1,11 @@
+.button {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.my-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
