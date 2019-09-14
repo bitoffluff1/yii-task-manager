@@ -25,4 +25,5 @@ class ActivityController extends Controller
     {
         //создание
     }
+
 }

@@ -5,8 +5,7 @@
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-
-    <p><?= Yii::$app->path->getPath()?></p>
+    <?= Yii::$app->session->get("lastPage", "NOT PATH")?>
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>

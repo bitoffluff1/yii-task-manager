@@ -21,10 +21,7 @@ $config = [
     ],
     'components' => [
         'seo' => [
-          'class' => Seo::class, //'app\components\Seo'
-        ],
-        'path' => [
-            'class' => Path::class,
+            'class' => Seo::class, //'app\components\Seo'
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

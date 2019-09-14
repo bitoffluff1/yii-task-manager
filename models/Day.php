@@ -8,7 +8,6 @@ use yii\base\Model;
 
 class Day extends Model
 {
-    public $date;
-    public $type;
+    public $dayOff = false; //false - рабочий, true - выходной
     public $activities;
 }
