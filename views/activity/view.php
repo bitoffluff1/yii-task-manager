@@ -17,7 +17,7 @@ $this->registerCssFile("@web/css/activity.css");
     </div>
 </div>
 
-<h1>Activity view</h1>
+<h1>Просмотр события</h1>
 
 <div class="row">
     <ul class="list-group col-md-6">
