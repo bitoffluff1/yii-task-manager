@@ -25,7 +25,7 @@ $this->registerCssFile("@web/css/activity.css");
         foreach ($model as $attribute => $value) {
             echo <<<php
 <li class="list-group-item my-list">
-    <h4>{$model->getAttributeLabel($attribute)}</h4>
+    <h4>{$attribute}</h4>
     <span class="text-muted">{$value}</span>
 </li>
 php;
