@@ -36,8 +36,8 @@ class Activity extends Model
         return [
             [['title'], 'required'],
             [['title', 'description'], 'string'],
-            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:Y-m-d'],
             [['title'], 'string', 'min' => 2, 'max' => 30],
+            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:Y-m-d'],
             [['repeat', 'blocked'], 'boolean'],
             [['uploadFile'], 'file', 'maxFiles' => 5]
         ];

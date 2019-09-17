@@ -6,7 +6,6 @@
 
 use yii\helpers\Html;
 
-$this->registerCssFile("@web/css/activity.css");
 ?>
 
 <div class="button">

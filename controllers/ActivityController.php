@@ -16,7 +16,6 @@ class ActivityController extends Controller
     {
         $query = new Query();
         $query->select('*')->from('activities');
-
         $rows = $query->all();
 
         return $this->render('index', [
@@ -24,7 +23,7 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView($id = 1)
     {
         $db = Yii::$app->db;
 
