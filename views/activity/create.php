@@ -12,18 +12,17 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-    'action' => '/activity/submit',
-    'options' => ['enctype' => 'multipart/form-data'],
+    'action' => '/activity/submit'
 ]) ?>
 
 <?= $form->field($model, 'title')->textInput() ?>
-<?= $form->field($model, 'dayStart')->textInput() ?>
-<?= $form->field($model, 'dayEnd')->textInput() ?>
-<?= $form->field($model, 'description')->textarea() ?>
+<?= $form->field($model, 'dayStart')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'dayEnd')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 <?= $form->field($model, 'repeat')->checkbox() ?>
 <?= $form->field($model, 'blocked')->checkbox() ?>
-<?= $form->field($model, 'uploadFile[]')->fileInput(['multiple' => 'multiple'])->label('Добавить файл') ?>
-<?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
+<?= $form->field($model, 'uploadFile[]')->fileInput(['multiple' => 'true'])?>
+<?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
 
 <?php ActiveForm::end() ?>
 

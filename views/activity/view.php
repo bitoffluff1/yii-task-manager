@@ -6,7 +6,6 @@
 
 use yii\helpers\Html;
 
-$this->registerCssFile("@web/css/activity.css");
 ?>
 
 <div class="button">
@@ -17,7 +16,7 @@ $this->registerCssFile("@web/css/activity.css");
     </div>
 </div>
 
-<h1>Activity view</h1>
+<h1>Просмотр события</h1>
 
 <div class="row">
     <ul class="list-group col-md-6">
@@ -25,7 +24,7 @@ $this->registerCssFile("@web/css/activity.css");
         foreach ($model as $attribute => $value) {
             echo <<<php
 <li class="list-group-item my-list">
-    <h4>{$model->getAttributeLabel($attribute)}</h4>
+    <h4>{$attribute}</h4>
     <span class="text-muted">{$value}</span>
 </li>
 php;

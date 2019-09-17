@@ -20,13 +20,14 @@ class Activity extends Model
     public function attributeLabels()
     {
         return [
-            'title' => 'Тема события',
+            'title' => 'Название',
             'dayStart' => 'Начало события',
             'dayEnd' => 'Конец события',
             'userId' => 'Пользователь',
             'description' => 'Описание события',
-            'repeat' => 'Повторяющееся',
+            'repeat' => 'Повтор',
             'blocked' => 'Главное',
+            'uploadFile' => 'Добавить файл'
         ];
     }
 
@@ -34,8 +35,11 @@ class Activity extends Model
     {
         return [
             [['title'], 'required'],
-            [['dayStart', 'dayEnd'], 'date', 'format' =>'dd/MM/yyyy'],
-            [['title'], 'string', 'min' => 5, 'max' => 30],
+            [['title', 'description'], 'string'],
+            [['title'], 'string', 'min' => 2, 'max' => 30],
+            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:Y-m-d'],
+            [['repeat', 'blocked'], 'boolean'],
+            [['uploadFile'], 'file', 'maxFiles' => 5]
         ];
     }
 
