@@ -39,7 +39,7 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function actionView($id = 1)
+    public function actionView($id)
     {
         $db = Yii::$app->db;
 
@@ -52,16 +52,16 @@ class ActivityController extends Controller
 
     public function actionCreate($id = '')
     {
-        $model = new Activity();
-
         if (!empty($id)) {
+            $model = Activity::findOne($id);
             return $this->render('update', ['model' => $model]);
         } else {
+            $model = new Activity();
             return $this->render('create', ['model' => $model]);
         }
     }
 
-    public function actionSubmit()
+    public function actionSubmit($id = '')
     {
         $model = new Activity();
 
@@ -69,16 +69,11 @@ class ActivityController extends Controller
             //$model->uploadFile = UploadedFile::getInstances($model, 'uploadFile');
 
             if ($model->validate()) {
-                if(!empty($model->id)){
-                    $model->update();
-                }else{
-                    $model->save();
-                }
+                $model->save();
 
                 return $this->redirect(['/activity']);
             } else if ($model->hasErrors()) {
                 var_dump($model->getErrors());
-                exit;
             }
         }
     }

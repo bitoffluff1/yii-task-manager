@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-    'action' => '/activity/submit'
+    'action' => "/activity/submit?id={$model['id']}"
 ]) ?>
 
 <?= $form->field($model, 'title')->textInput() ?>
