@@ -5,17 +5,33 @@ namespace app\controllers;
 
 use app\models\Activity;
 use Yii;
-use yii\db\Query;
 use yii\db\QueryBuilder;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
+    /*public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index', 'view', 'create'], //может просматривать только админ
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+        ];
+    }*/
+
     public function actionIndex()
     {
-        $query = new Query();
-        $query->select('*')->from('activities');
+        $query = Activity::find();
+
         $rows = $query->all();
 
         return $this->render('index', [
@@ -34,11 +50,15 @@ class ActivityController extends Controller
         return $this->render("view", ["model" => $model]);
     }
 
-    public function actionCreate()
+    public function actionCreate($id = '')
     {
         $model = new Activity();
 
-        return $this->render('create', ['model' => $model]);
+        if (!empty($id)) {
+            return $this->render('update', ['model' => $model]);
+        } else {
+            return $this->render('create', ['model' => $model]);
+        }
     }
 
     public function actionSubmit()
@@ -46,22 +66,20 @@ class ActivityController extends Controller
         $model = new Activity();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->uploadFile = UploadedFile::getInstances($model, 'uploadFile');
+            //$model->uploadFile = UploadedFile::getInstances($model, 'uploadFile');
 
             if ($model->validate()) {
+                if(!empty($model->id)){
+                    $model->update();
+                }else{
+                    $model->save();
+                }
 
-                $query = new QueryBuilder(Yii::$app->db);
-                $params = [];
-                echo $query->insert('activities', $model->attributes, $params);
-
-                return $this->redirect(['/activity/result']);
-            } else {
-                var_dump($model);
+                return $this->redirect(['/activity']);
+            } else if ($model->hasErrors()) {
+                var_dump($model->getErrors());
                 exit;
             }
-        } else {
-            var_dump($model);
-            exit;
         }
     }
 
