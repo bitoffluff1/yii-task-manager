@@ -18,10 +18,11 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'dayStart')->textInput(['type' => 'date']) ?>
 <?= $form->field($model, 'dayEnd')->textInput(['type' => 'date']) ?>
+<?= $form->field($model, 'userId')->textInput(['autocomplete' => 'off']) ?>
 <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 <?= $form->field($model, 'repeat')->checkbox() ?>
 <?= $form->field($model, 'blocked')->checkbox() ?>
-<?= $form->field($model, 'uploadFile[]')->fileInput(['multiple' => 'true'])?>
+<?php //$form->field($model, 'uploadFile[]')->fileInput(['multiple' => 'true']) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
 
 <?php ActiveForm::end() ?>

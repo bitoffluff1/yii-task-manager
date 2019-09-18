@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var $this yii\web\View
- * @var array $activities
+ * @var app\models\Activity[] $activities
  */
 
 ?>
@@ -15,7 +15,7 @@ use yii\helpers\Html;
 <ul>
     <?php foreach ($activities as $item) { ?>
         <li>
-            <?= var_dump($item); ?>
+            <a href="/activity/view?id=<?=$item->id;?>"><?=$item->title;?></a>
         </li>
     <?php } ?>
 </ul>
