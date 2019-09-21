@@ -43,27 +43,27 @@ class ActivityController extends Controller
     {
         $db = Yii::$app->db;
 
-        $model = $db->createCommand('select * from activities where id=:id', [
+        $model = $db->createCommand('select * from activity where id=:id', [
             ':id' => $id
         ])->queryOne();
 
-        return $this->render("view", ["model" => $model]);
+        return $this->render("view", [
+            "model" => $model
+        ]);
     }
 
-    public function actionCreate($id = '')
+    public function actionEdit(int $id = null)
     {
-        if (!empty($id)) {
-            $model = Activity::findOne($id);
-            return $this->render('update', ['model' => $model]);
-        } else {
-            $model = new Activity();
-            return $this->render('create', ['model' => $model]);
-        }
+        $item = $id ? Activity::findOne($id) : new Activity();
+
+        return $this->render('edit', [
+            'model' => $item
+        ]);
     }
 
-    public function actionSubmit($id = '')
+    public function actionSubmit(int $id = null)
     {
-        $model = new Activity();
+        $model = $id ? Activity::findOne($id) : new Activity();
 
         if ($model->load(Yii::$app->request->post())) {
             //$model->uploadFile = UploadedFile::getInstances($model, 'uploadFile');

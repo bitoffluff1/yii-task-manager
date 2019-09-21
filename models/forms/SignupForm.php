@@ -17,11 +17,21 @@ class SignupForm extends Model
     public $password;
     public $email;
 
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'email' => 'Email',
+        ];
+    }
+
     public function rules()
     {
         return [
             [['username', 'password', 'email'], 'required'],
             [['email'], 'email'],
+            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'], //в классе юзер, в атрибуте юзер нейм
             [['username'], 'string', 'min' => 4, 'max' => 20],
             [['password'], 'string', 'min' => 5]
         ];
@@ -40,9 +50,9 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->password = $this->password;
 
-            $user->save();
-
-            return $user;
+            if ($user->save()) {
+                return Yii::$app->getUser()->login($user);
+            }
         }
         return false;
     }

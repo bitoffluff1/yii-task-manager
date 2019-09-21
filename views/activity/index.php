@@ -10,7 +10,7 @@ use yii\helpers\Html;
 ?>
 
 <h2>Список событий</h2>
-<?= Html::a("Добавить новое событие", "/activity/create", ["class" => "btn btn-info"]) ?>
+<?= Html::a("Добавить новое событие", "/activity/edit", ["class" => "btn btn-info"]) ?>
 
 <ul>
     <?php foreach ($activities as $item) { ?>
