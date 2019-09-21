@@ -11,8 +11,8 @@ use yii\helpers\Html;
 <div class="button">
     <?= Html::a("<< Календарь", "/", ["class" => "btn btn-primary"]) ?>
     <div>
-        <?= Html::a("Редактировать событие", "/", ["class" => "btn btn-info"]) ?>
-        <?= Html::a("Добавить новое событие", "/activity/create", ["class" => "btn btn-info"]) ?>
+        <a href="/activity/edit?id=<?= $model['id']; ?>" class="btn btn-info">Редактировать событие</a>
+        <a href="/activity/edit" class="btn btn-info">Добавить новое событие</a>
     </div>
 </div>
 

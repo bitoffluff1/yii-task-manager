@@ -3,44 +3,66 @@
 
 namespace app\models;
 
+use Yii;
+use yii\db\ActiveRecord;
 
-use yii\base\Model;
-
-class Activity extends Model
+/**
+ * Модель - Событие
+ * @package app\models
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $day_start
+ * @property string $day_end
+ * @property int $user_id
+ * @property string $description
+ * @property boolean $repeat
+ * @property boolean $blocked
+ *
+ * @property-read User $user
+ */
+class Activity extends ActiveRecord
 {
-    public $title;
-    public $dayStart;
-    public $dayEnd;
-    public $userId;
-    public $description;
-    public $repeat = false;
-    public $blocked = true;
-    public $uploadFile;
+    public function rules()
+    {
+        return [
+            [['title', 'day_start', 'user_id', 'description'], 'required'],
+            [['title', 'description'], 'string'],
+            [['title'], 'string', 'min' => 2, 'max' => 160],
+            [['day_end'], 'validateDayEnd'],
+            [['day_start', 'day_end'], 'date', 'format' => Yii::$app->params['formatDate']],
+            [['user_id'], 'integer'],
+            [['repeat', 'blocked'], 'boolean'],
+            [['day_end'], 'default', 'value' => function(){
+                return $this->day_start;
+            }]
+            //[['uploadFile'], 'file', 'maxFiles' => 5],
+        ];
+    }
+
+    public function validateDayEnd($attribute)
+    {
+        if($this->day_start > $this->$attribute){
+            $this->addError($attribute, 'Дата окончания должна быть позже чем дата начала события');
+        }
+    }
 
     public function attributeLabels()
     {
         return [
             'title' => 'Название',
-            'dayStart' => 'Начало события',
-            'dayEnd' => 'Конец события',
-            'userId' => 'Пользователь',
+            'day_start' => 'Дата начала',
+            'day_end' => 'Дата окончания',
+            'user_id' => 'Пользователь',
             'description' => 'Описание события',
             'repeat' => 'Повтор',
-            'blocked' => 'Главное',
-            'uploadFile' => 'Добавить файл'
+            'blocked' => 'Блокирующее',
+            'upload_file' => 'Прикрепленные файлы',
         ];
     }
 
-    public function rules()
+    public function getUser()
     {
-        return [
-            [['title'], 'required'],
-            [['title', 'description'], 'string'],
-            [['title'], 'string', 'min' => 2, 'max' => 30],
-            [['dayStart', 'dayEnd'], 'date', 'format' => 'php:Y-m-d'],
-            [['repeat', 'blocked'], 'boolean'],
-            [['uploadFile'], 'file', 'maxFiles' => 5]
-        ];
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-
 }
