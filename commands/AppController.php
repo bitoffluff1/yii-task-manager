@@ -3,7 +3,9 @@
 
 namespace app\commands;
 
+use app\models\Activity;
 use app\models\User;
+use Yii;
 use yii\console\Controller;
 
 /**
@@ -14,19 +16,61 @@ use yii\console\Controller;
  */
 class AppController extends Controller
 {
+    /**
+     * Создание начальных пользователей (admin, manager, user)
+     */
     public function actionUsers()
     {
-        $admin = new User([
-            'username' => 'admin',
-            'email' => 'a@mail.ru',
-            'created_at' => time(),
-            'updated_at' => time(),
-        ]);
+        $users = [
+            'manager',
+            'user'
+        ];
 
-        $admin->generateAuthKey();
-        $admin->password = '123123';
+        foreach ($users as $login) {
+            $user = new User([
+                'username' => $login,
+                'password_reset_token' => "{$login}-token",
+                'email' => "{$login}@mail.ru",
+                'created_at' => time(),
+                'updated_at' => time(),
+            ]);
 
-        $admin->save();
+            $user->generateAuthKey();
+            $user->password = '123123';
+
+            $user->save();
+        }
+    }
+
+    public function actionActivities()
+    {
+        $titles = [
+            'Первое событие',
+            'Второе событие',
+            'Третье событие',
+            'Четвертое событие',
+        ];
+
+        $day = 1;
+        $today = time();
+
+        foreach ($titles as $title) {
+            $activityDate = date(Yii::$app->params['formatDate'], strtotime("+{$day} days", $today));
+
+            $activity = new Activity([
+                'title' => $title,
+                'description' => chunk_split(Yii::$app->security->generateRandomString(50), random_int(10, 30), ' '),
+                'user_id' => random_int(1, 5),
+                'day_start' => $activityDate,
+                'day_end' => $activityDate,
+                'blocked' => random_int(0, 1),
+                'repeat' => false,
+            ]);
+
+            $activity->save();
+
+            $day++;
+        }
     }
 
 

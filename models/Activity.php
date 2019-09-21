@@ -30,7 +30,7 @@ class Activity extends ActiveRecord
             [['title', 'description'], 'string'],
             [['title'], 'string', 'min' => 2, 'max' => 160],
             [['day_end'], 'validateDayEnd'],
-            [['day_start', 'day_end'], 'date', 'format' => Yii::$app->params['formatDate']],
+            [['day_start', 'day_end'], 'date', 'format' => 'php:' . Yii::$app->params['formatDate']],
             [['user_id'], 'integer'],
             [['repeat', 'blocked'], 'boolean'],
             [['day_end'], 'default', 'value' => function(){
