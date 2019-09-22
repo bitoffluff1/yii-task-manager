@@ -13,12 +13,12 @@ use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
-    /*public function behaviors()
+   public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'view', 'create'], //может просматривать только админ
+                'only' => ['index', 'view', 'update'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -27,7 +27,7 @@ class ActivityController extends Controller
                 ],
             ],
         ];
-    }*/
+    }
 
     public function actionIndex()
     {
@@ -70,14 +70,11 @@ class ActivityController extends Controller
 
                 return $this->redirect(['/activity']);
             } else if ($model->hasErrors()) {
-                var_dump($model->getErrors());
+                echo $model->getErrors();
             }
         }
     }
 
-    public function actionResult()
-    {
-        return 'OK';
-    }
+
 
 }

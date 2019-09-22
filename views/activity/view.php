@@ -20,30 +20,7 @@ use yii\widgets\DetailView;
 
     <h1>Просмотр события</h1>
 
-<?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        [
-            'label' => 'Порядковый номер',
-            'value' => function (Activity $model) {
-                return "# {$model->id}";
-            }
-        ],
-        'title',
-        [
-            'attribute' => 'day_start',
-            'format'=> ['date', 'php:' . Yii::$app->params['formatDate']],
-        ],
-        [
-            'attribute' => 'day_end',
-            'format'=> ['date', 'php:' . Yii::$app->params['formatDate']],
-        ],
-        [
-            'label' => 'Имя создателя',
-            'attribute' => 'user.username',
-        ],
-        'description',
-        'repeat:boolean',
-        'blocked:boolean',
-    ],
-]) ?>
+<?= $this->render('myActivities/view', [
+    'model' => $model
+]);
+?>

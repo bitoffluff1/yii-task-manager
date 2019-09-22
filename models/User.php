@@ -47,6 +47,15 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function rules()
+    {
+        return [
+            [['email'], 'email'],
+            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username'],
+            [['username'], 'string', 'min' => 4, 'max' => 20],
+        ];
+    }
+
     //методы для identity interface чтобы можно было авторизоваться и аутентифцироваться на сайте
     public static function findIdentity($id)
     {
