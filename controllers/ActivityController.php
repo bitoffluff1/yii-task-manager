@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\Activity;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\QueryBuilder;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -30,33 +31,29 @@ class ActivityController extends Controller
 
     public function actionIndex()
     {
-        $query = Activity::find();
-
-        $rows = $query->all();
+        $provider = new ActiveDataProvider([
+            'query' => Activity::find(),
+        ]);
 
         return $this->render('index', [
-            'activities' => $rows
+            'provider' => $provider,
         ]);
     }
 
-    public function actionView($id)
+    public function actionView(int $id)
     {
-        $db = Yii::$app->db;
+        $item = Activity::findOne($id);
 
-        $model = $db->createCommand('select * from activity where id=:id', [
-            ':id' => $id
-        ])->queryOne();
-
-        return $this->render("view", [
-            "model" => $model
+        return $this->render('view', [
+            'model' => $item
         ]);
     }
 
-    public function actionEdit(int $id = null)
+    public function actionUpdate(int $id = null)
     {
         $item = $id ? Activity::findOne($id) : new Activity();
 
-        return $this->render('edit', [
+        return $this->render('update', [
             'model' => $item
         ]);
     }

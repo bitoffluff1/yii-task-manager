@@ -4,6 +4,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -23,26 +24,42 @@ use yii\db\ActiveRecord;
  */
 class Activity extends ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => 'user_id',
+            ]
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['title', 'day_start', 'user_id', 'description'], 'required'],
+            [['title', 'day_start', 'description'], 'required'],
+
             [['title', 'description'], 'string'],
             [['title'], 'string', 'min' => 2, 'max' => 160],
+
             [['day_end'], 'validateDayEnd'],
-            [['day_start', 'day_end'], 'date', 'format' => 'php:' . Yii::$app->params['formatDate']],
-            [['user_id'], 'integer'],
-            [['repeat', 'blocked'], 'boolean'],
-            [['day_end'], 'default', 'value' => function(){
+            [['day_end'], 'default', 'value' => function () {
                 return $this->day_start;
-            }]
+            }],
+            [['day_start', 'day_end'], 'date', 'format' => 'php:' . Yii::$app->params['formatDate']],
+
+            [['user_id'], 'integer'],
+
+            [['repeat', 'blocked'], 'boolean'],
+
             //[['uploadFile'], 'file', 'maxFiles' => 5],
         ];
     }
 
     public function validateDayEnd($attribute)
     {
-        if($this->day_start > $this->$attribute){
+        if ($this->day_start > $this->$attribute) {
             $this->addError($attribute, 'Дата окончания должна быть позже чем дата начала события');
         }
     }

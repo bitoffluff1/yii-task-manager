@@ -9,19 +9,21 @@ use yii\widgets\ActiveForm;
  * @var View $this
  * @var  Activity $model
  */
+
+$action = $model['id'] ? "/activity/submit?id={$model['id']}" : '/activity/submit';
+
 ?>
 
 <?php $form = ActiveForm::begin([
-    'action' => "/activity/submit?id={$model['id']}"
+    'action' => $action,
 ]) ?>
 
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'day_start')->textInput(['type' => 'date']) ?>
 <?= $form->field($model, 'day_end')->textInput(['type' => 'date']) ?>
-<?= $form->field($model, 'user_id')->textInput(['autocomplete' => 'off']) ?>
 <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 <?= $form->field($model, 'repeat')->checkbox() ?>
 <?= $form->field($model, 'blocked')->checkbox() ?>
-<?= Html::submitButton('Изменить', ['class' => 'btn btn-success']) ?>
+<?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
 
 <?php ActiveForm::end() ?>

@@ -5,6 +5,7 @@ namespace app\models;
 
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -26,6 +27,26 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'password_hash' => 'Пароль',
+            'auth_key' => 'Ключ авторизации',
+            'password_reset_token' => 'Токен доступа',
+            'email' => 'Почтовый адрес',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата последнего изменения',
+        ];
+    }
+
     //методы для identity interface чтобы можно было авторизоваться и аутентифцироваться на сайте
     public static function findIdentity($id)
     {

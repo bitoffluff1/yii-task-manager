@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\models\forms;
 
+use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -43,8 +44,7 @@ class SignupForm extends Model
             $user = new User([
                 'username' => $this->username,
                 'email' => $this->email,
-                'created_at' => time(),
-                'updated_at' => time(),
+                'password_reset_token' => "{$this->username}-token",
             ]);
 
             $user->generateAuthKey();
