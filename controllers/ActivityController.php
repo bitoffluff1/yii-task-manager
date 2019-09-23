@@ -9,21 +9,22 @@ use yii\data\ActiveDataProvider;
 use yii\db\QueryBuilder;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
-   public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'view', 'update'],
+                'only' => ['index', 'view', 'update', 'delete', 'submit'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['admin'],
-                    ],
+                        'roles' => ['@']
+                    ]
                 ],
             ],
         ];
@@ -31,8 +32,14 @@ class ActivityController extends Controller
 
     public function actionIndex()
     {
+        $query = Activity::find();
+
+        if (!Yii::$app->user->can('admin')) {
+            $query->andWhere(['user_id' => Yii::$app->user->id]);
+        }
+
         $provider = new ActiveDataProvider([
-            'query' => Activity::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
@@ -53,28 +60,16 @@ class ActivityController extends Controller
     {
         $item = $id ? Activity::findOne($id) : new Activity();
 
-        return $this->render('update', [
-            'model' => $item
-        ]);
-    }
-
-    public function actionSubmit(int $id = null)
-    {
-        $model = $id ? Activity::findOne($id) : new Activity();
-
-        if ($model->load(Yii::$app->request->post())) {
-            //$model->uploadFile = UploadedFile::getInstances($model, 'uploadFile');
-
-            if ($model->validate()) {
-                $model->save();
-
+        if ($item->load(Yii::$app->request->post()) && $item->validate()) {
+            if ($item->save()) {
                 return $this->redirect(['/activity']);
-            } else if ($model->hasErrors()) {
-                echo $model->getErrors();
             }
+        } else {
+            return $this->render('update', [
+                'model' => $item
+            ]);
         }
     }
-
 
 
 }

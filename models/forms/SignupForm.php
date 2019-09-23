@@ -50,9 +50,12 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->password = $this->password;
 
-            if ($user->save()) {
+            $user->save();
+
+            if (!Yii::$app->user->can('admin')) {
                 return Yii::$app->getUser()->login($user);
             }
+            return true;
         }
         return false;
     }

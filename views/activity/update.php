@@ -14,9 +14,7 @@ $action = $model['id'] ? "/activity/submit?id={$model['id']}" : '/activity/submi
 
 ?>
 
-<?php $form = ActiveForm::begin([
-    'action' => $action,
-]) ?>
+<?php $form = ActiveForm::begin([]) ?>
 
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'day_start')->textInput(['type' => 'date']) ?>

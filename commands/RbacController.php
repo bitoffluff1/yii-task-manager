@@ -32,7 +32,7 @@ class RbacController extends Controller
         $auth->add($adminRole);
         $auth->addChild($adminRole, $managerRole);
 
-        //привязываем конкртеному пользователю
+        //привязываем конкретному пользователю
         $auth->assign($adminRole, 1);
         $auth->assign($managerRole, 2);
         $auth->assign($userRole, 3);

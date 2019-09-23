@@ -1,5 +1,6 @@
 <?php
 
+use app\models\User;
 use yii\grid\ActionColumn;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
