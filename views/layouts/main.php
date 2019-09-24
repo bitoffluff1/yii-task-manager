@@ -15,7 +15,7 @@ AppAsset::register($this);
 
 $items = [
     ['label' => 'Главная', 'url' => ['/site/index']],
-    ['label' => 'События', 'url' => ['/activity/index']],
+    ['label' => 'Календарь', 'url' => ['/activity/calendar']],
 ];
 
 if (Yii::$app->user->isGuest) {
@@ -35,6 +35,9 @@ if (Yii::$app->user->can('admin')) {
     $items[] = ['label' => 'Пользователи', 'url' => ['/user']];
 }
 
+if (!Yii::$app->user->isGuest) {
+    $items[] = ['label' => 'Личный кабинет', 'url' => ['/user']];
+}
 ?>
 
 

@@ -15,7 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1>Пользователи</h1>
-    <?= Html::a('Добавить пользователя', '/site/signup', ['class' => 'btn btn-info']) ?>
+
+    <?php
+    if (Yii::$app->user->can('admin')) {
+        Html::a('Добавить пользователя', '/site/signup', ['class' => 'btn btn-info']);
+    }
+    ?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
