@@ -5,6 +5,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -31,7 +32,9 @@ class Activity extends ActiveRecord
                 'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => 'user_id',
-            ]
+            ],
+
+            TimestampBehavior::class,
         ];
     }
 
@@ -60,7 +63,7 @@ class Activity extends ActiveRecord
     public function validateDayEnd($attribute)
     {
         if ($this->day_start > $this->$attribute) {
-            $this->addError($attribute, 'Дата окончания должна быть позже чем дата начала события');
+            $this->addError($attribute, 'Дата окончания события должна быть позже даты начала события');
         }
     }
 

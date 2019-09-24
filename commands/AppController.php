@@ -60,7 +60,7 @@ class AppController extends Controller
             $activity = new Activity([
                 'title' => $title,
                 'description' => chunk_split(Yii::$app->security->generateRandomString(50), random_int(10, 30), ' '),
-                'user_id' => random_int(1, 5),
+                'user_id' => random_int(1, 3),
                 'day_start' => $activityDate,
                 'day_end' => $activityDate,
                 'blocked' => random_int(0, 1),

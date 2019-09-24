@@ -51,8 +51,17 @@ class SignupForm extends Model
             $user->password = $this->password;
 
             if ($user->save()) {
+                $auth = Yii::$app->authManager;
+
+                $role = $auth->getRole('user');
+
+                $auth->assign($role, $user->id);
+            }
+
+            if (!Yii::$app->user->can('admin')) {
                 return Yii::$app->getUser()->login($user);
             }
+            return true;
         }
         return false;
     }

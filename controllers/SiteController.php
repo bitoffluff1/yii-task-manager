@@ -88,13 +88,16 @@ class SiteController extends SessionController
 
     public function actionSignup()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->can('admin') && !Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $user = $model->signup()) {
+            if (Yii::$app->user->can('admin')) {
+                return $this->redirect(['/user']);
+            }
             return $this->goHome();
         }
 
