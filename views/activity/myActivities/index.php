@@ -30,14 +30,11 @@ $columns = [
     ],
     'repeat:boolean',
     'blocked:boolean',
-];
-
-if (Yii::$app->user->can('manager')) {
-    $columns[] = [
+    [
         'class' => ActionColumn::class,
         'header' => 'Операции',
-    ];
-}
+    ],
+];
 ?>
 
 

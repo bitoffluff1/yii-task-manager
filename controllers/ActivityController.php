@@ -4,13 +4,12 @@
 namespace app\controllers;
 
 use app\models\Activity;
+use app\models\ActivitySearch;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\QueryBuilder;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
 
 class ActivityController extends Controller
 {
@@ -47,13 +46,36 @@ class ActivityController extends Controller
         ]);
     }
 
+    public function actionCalendar()
+    {
+        $searchModel = new ActivitySearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+
+        return $this->render('calendar', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     public function actionView(int $id)
     {
-        $item = Activity::findOne($id);
+        $cacheKey = "activity_{$id}";
 
-        return $this->render('view', [
-            'model' => $item
-        ]);
+        if (Yii::$app->cache->exists($cacheKey)) {
+            $item = Yii::$app->cache->get($cacheKey);
+        } else {
+            $item = Activity::findOne($id);
+
+            Yii::$app->cache->set($cacheKey, $item);
+        }
+
+        if (Yii::$app->user->can('manager') || $item->user_id == Yii::$app->user->id) {
+            return $this->render('view', [
+                'model' => $item
+            ]);
+        } else {
+            throw new NotFoundHttpException();
+        }
+
     }
 
     public function actionUpdate(int $id = null)

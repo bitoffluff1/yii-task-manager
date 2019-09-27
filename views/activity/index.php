@@ -14,11 +14,18 @@ use yii\helpers\Html;
 ?>
 
 <h2>Список событий</h2>
-<?= Html::a(
-    "Добавить новое событие",
-    "/activity/update",
-    ["class" => "btn btn-info"]
-) ?>
+<div class="button">
+    <?= Html::a("<< Календарь", "/activity/calendar", ["class" => "btn btn-primary"]) ?>
+    <div>
+        <?= Html::a(
+            "Добавить новое событие",
+            "/activity/update",
+            ["class" => "btn btn-info"]
+        ) ?>
+    </div>
+</div>
+
+
 
 
 <?= $this->render('myActivities/index', [

@@ -28,6 +28,11 @@ class UserController extends Controller
                     [
                         'allow' => true,
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'update', 'delete'],
+                        'roles' => ['user'],
                     ]
                 ]
             ]
@@ -36,8 +41,14 @@ class UserController extends Controller
 
     public function actionIndex()
     {
+        $query = User::find();
+
+        if (!Yii::$app->user->can('admin')) {
+            $query->andWhere(['id' => Yii::$app->user->id]);
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => User::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
