@@ -52,7 +52,7 @@ class ActivityController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('calendar', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -91,6 +91,26 @@ class ActivityController extends Controller
                 'model' => $item
             ]);
         }
+    }
+
+    public function actionDelete(int $id)
+    {
+        Activity::findOne($id)->delete();
+
+        return $this->redirect(['/activity/calendar']);
+    }
+
+    public function actionDay($day)
+    {
+        $query = Activity::find()->andWhere(['day_start' => $day]);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('day', [
+            'provider' => $provider,
+        ]);
     }
 
 

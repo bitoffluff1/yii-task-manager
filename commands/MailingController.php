@@ -8,7 +8,7 @@ use app\models\User;
 use Yii;
 use yii\console\Controller;
 
-class mailingController extends Controller
+class MailingController extends Controller
 {
 
     public function actionIndex(int $id)

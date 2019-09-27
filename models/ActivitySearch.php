@@ -25,7 +25,7 @@ class ActivitySearch extends Activity
         $query->andFilterWhere([
             'id' => $this->id,
             'day_start' => $this->calories,
-            'description' => $this->peak_heartrate,
+            'title' => $this->peak_heartrate,
         ]);
 
         return $dataProvider;
