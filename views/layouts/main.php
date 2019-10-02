@@ -32,11 +32,11 @@ if (Yii::$app->user->isGuest) {
 }
 
 if (Yii::$app->user->can('admin')) {
-    $items[] = ['label' => 'Пользователи', 'url' => ['/user']];
+    $items[] = ['label' => 'Пользователи', 'url' => ['/user/index']];
 }
 
 if (!Yii::$app->user->isGuest) {
-    $items[] = ['label' => 'Личный кабинет', 'url' => ['/user']];
+    $items[] = ['label' => 'Личный кабинет', 'url' => ['/user/index']];
 }
 ?>
 

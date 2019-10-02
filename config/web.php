@@ -59,7 +59,25 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'enableStrictParsing' => true,
+            'rules' => [
+                '/' => 'site/index',
+                '/login' => 'site/login',
+                '/logout' => 'site/logout',
+                '/signup' => 'site/signup',
+
+                '/activities' => 'activity/index',
+                '/calendar' => 'activity/calendar',
+                '/day/<day:[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])>' => 'activity/day',
+                '/activity/<id:\d+>' => 'activity/view',
+                '/activity/update/<id:\d+>' => 'activity/update',
+                '/activity/delete/<id:\d+>' => 'activity/delete',
+
+                '/users' => 'user/index',
+                '/user/<id:\d+>' => 'user/view',
+                '/user/update/<id:\d+>' => 'user/update',
+                '/user/delete/<id:\d+>' => 'user/delete',
+            ],
         ],
 
         'authManager' => [
