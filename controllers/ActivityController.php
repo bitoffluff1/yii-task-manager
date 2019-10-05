@@ -84,7 +84,7 @@ class ActivityController extends Controller
 
         if ($item->load(Yii::$app->request->post()) && $item->validate()) {
             if ($item->save()) {
-                return $this->redirect(['/activity']);
+                return $this->redirect(['/calendar']);
             }
         } else {
             return $this->render('update', [

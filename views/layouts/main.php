@@ -18,6 +18,14 @@ $items = [
     ['label' => 'Календарь', 'url' => ['/activity/calendar']],
 ];
 
+if (Yii::$app->user->can('admin')) {
+    $items[] = ['label' => 'Пользователи', 'url' => ['/user/index']];
+}
+
+if (!Yii::$app->user->isGuest) {
+    $items[] = ['label' => 'Личный кабинет', 'url' => ['/user/profile']];
+}
+
 if (Yii::$app->user->isGuest) {
     $items[] = ['label' => 'Войти', 'url' => ['/site/login']];
 } else {
@@ -29,14 +37,6 @@ if (Yii::$app->user->isGuest) {
         )
         . Html::endForm()
         . '</li>';
-}
-
-if (Yii::$app->user->can('admin')) {
-    $items[] = ['label' => 'Пользователи', 'url' => ['/user/index']];
-}
-
-if (!Yii::$app->user->isGuest) {
-    $items[] = ['label' => 'Личный кабинет', 'url' => ['/user/index']];
 }
 ?>
 
