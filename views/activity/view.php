@@ -4,17 +4,18 @@
  * @var app\models\Activity $model
  */
 
-use app\models\Activity;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 ?>
 
     <div class="button">
-        <?= Html::a("<< Календарь", "/activity/calendar", ["class" => "btn btn-primary"]) ?>
+
+        <?=
+        //эта ссылка не работает, хотя этот url прописан в config
+        Html::a("<< Календарь", "/activity/calendar", ["class" => "btn btn-primary"]) ?>
         <div>
-            <a href="/activity/update?id=<?= $model['id']; ?>" class="btn btn-info">Редактировать событие</a>
-            <a href="/activity/update" class="btn btn-info">Добавить новое событие</a>
+            <?= Html::a("Редактировать событие", ["/activity/update", 'id' => $model['id']], ["class" => "btn btn-info"]) ?>
+            <?= Html::a("Добавить новое событие", "/activity/update", ["class" => "btn btn-info"]) ?>
         </div>
     </div>
 

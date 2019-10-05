@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="button">
     <div>
-        <a href="/user/update?id=<?= $model['id']; ?>" class="btn btn-info">Редактировать</a>
-        <a href="/user/delete?id=<?= $model['id']; ?>" class="btn btn-info">Удалить</a>
+        <?= Html::a("Редактировать", ["/user/update", 'id' => $model['id']], ["class" => "btn btn-info"]) ?>
+        <?= Html::a("Удалить", ["/user/delete", 'id' => $model['id']], ["class" => "btn btn-info"]) ?>
     </div>
 </div>
 

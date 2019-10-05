@@ -40,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
 
     <div class="col-lg-offset-1" style="color:#999;">
-        Если у вас нет учетной записи <a href="/site/signup">зарегистрируйтесь</a>.
+        Если у вас нет учетной записи
+        <?=Html::a('зарегистрируйтесь', ['/site/signup']) ?>.
     </div>
 </div>
 
