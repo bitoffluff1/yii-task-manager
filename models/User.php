@@ -4,6 +4,7 @@
 namespace app\models;
 
 
+use app\components\CachedRecordBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -31,6 +32,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::class,
+            [
+                'class' => CachedRecordBehavior::class,
+                'prefix' => 'user',
+            ]
         ];
     }
 

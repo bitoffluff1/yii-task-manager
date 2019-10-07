@@ -9,10 +9,9 @@ use yii\helpers\Html;
 ?>
 
     <div class="button">
-
         <?=
         //эта ссылка не работает, хотя этот url прописан в config
-        Html::a("<< Календарь", "/activity/calendar", ["class" => "btn btn-primary"]) ?>
+        Html::a("<< Календарь", '/activity/calendar', ["class" => "btn btn-primary"]) ?>
         <div>
             <?= Html::a("Редактировать событие", ["/activity/update", 'id' => $model['id']], ["class" => "btn btn-info"]) ?>
             <?= Html::a("Добавить новое событие", "/activity/update", ["class" => "btn btn-info"]) ?>

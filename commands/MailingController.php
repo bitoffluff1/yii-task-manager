@@ -11,9 +11,9 @@ use yii\console\Controller;
 class MailingController extends Controller
 {
 
-    public function actionIndex(int $id)
+    public function actionIndex($user)
     {
-        $user = User::findOne($id);
+        $user = is_numeric($user) ? User::findOne($user) : User::findAll(['email' => $user]);
 
         Yii::$app->mailer->compose()
             ->setFrom('admin@domain.com')

@@ -35,10 +35,10 @@ echo CalendarView::widget(
 
         'dayRender' => false,
         /* alternate to dayRender
-        'dayRender' => function($model,$calendar) {
-            return '<p>'.$model->id.'</p>';
-        },
-        */
+         'dayRender' => function($model, $calendar) {
+             return '<p>'.$model->id.'</p>';
+         },*/
+
 
     ]
 );

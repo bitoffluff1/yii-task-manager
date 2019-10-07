@@ -28,6 +28,7 @@ class ActivitySearch extends Activity
             'title' => $this->peak_heartrate,
         ]);
 
+
         return $dataProvider;
     }
 }
