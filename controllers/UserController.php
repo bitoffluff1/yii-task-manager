@@ -25,7 +25,7 @@ class UserController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'view', 'update', 'delete'],
+                'only' => ['index', 'view', 'update', 'delete', 'profile'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -33,7 +33,7 @@ class UserController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'update', 'delete'],
+                        'actions' => ['view', 'update', 'delete', 'profile'],
                         'roles' => ['user'],
                     ]
                 ]

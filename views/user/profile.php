@@ -36,7 +36,7 @@ $columns = [
 
 <div class="user-update">
 
-    <h1>Изменить</h1>
+    <h2>Изменить</h2>
 
     <?php $form = ActiveForm::begin([]); ?>
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
@@ -51,6 +51,8 @@ $columns = [
 </div>
 
 <div>
+    <h2>Все события</h2>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => $columns,

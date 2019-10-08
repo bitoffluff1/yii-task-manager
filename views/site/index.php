@@ -5,7 +5,7 @@
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-    <?= Yii::$app->session->get("lastPage", "NOT PATH")?>
+    <?//= Yii::$app->session->get("lastPage", "NOT PATH")?>
 
     <div class="jumbotron">
         <h1>Yii2 Calendar</h1>

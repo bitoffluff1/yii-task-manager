@@ -18,7 +18,7 @@ class ActivityController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'view', 'update', 'delete', 'submit'],
+                'only' => ['index', 'view', 'update', 'delete', 'calendar', 'day'],
                 'rules' => [
                     [
                         'allow' => true,
